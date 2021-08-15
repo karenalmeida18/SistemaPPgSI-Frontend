@@ -1,4 +1,4 @@
-const Theme = () => ({
+export const pallet = {
   gray1: '#f8f9fa',
   gray2: '#e0e0e0',
   gray3: '#b5b5b5',
@@ -9,6 +9,10 @@ const Theme = () => ({
   yellow: '#fcb421',
   shadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
   shadow2: 'rgba(0, 0, 0, 0.10) 0px 1px 4px',
-});
+};
+
+const Theme = () => (
+  pallet
+);
 
 export default Theme;

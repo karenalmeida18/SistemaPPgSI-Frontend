@@ -6,14 +6,21 @@ export const Wrapper = styled.div`
 `;
 
 export const Input = styled.input(({ theme }) => `
-   padding: 12px 4px;
+   padding: 14px 8px;
+   border-radius: 4px;
    border: 1px solid ${theme.gray3};
    outline-color: ${theme.primaryBlue};
    outline-width: thin;
+
+   ::placeholder {
+     color: ${theme.gray3};
+   }
+
 `);
 
 export const Label = styled.label(({ color, theme }) => `
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: 4px;
+  font-size: 16px;
   color: ${color || theme.gray4};
 `);
