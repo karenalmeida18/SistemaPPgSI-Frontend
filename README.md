@@ -5,7 +5,7 @@ Projeto desenvolvido para disciplina de Engenharia de Software I, um sistema que
 ## Scripts
 
 Para rodar o projeto local, primeiro instale as dependências:
-### `npm start`
+### `npm install`
 
 Após instalar, bastar dar start, rodando:
 ### `npm start`

@@ -34,9 +34,25 @@ module.exports = {
         'no-unused-vars': ['error', {
             args: 'none',
         }],
+        'import/extensions': ['error', 'ignorePackages', {
+            js: 'never',
+            mjs: 'never',
+            jsx: 'never',
+            tsx: 'never',
+        }],
         'one-var': 'off',
         'import/prefer-default-export': 'off',
         'one-var-declaration-per-line': 'off',
         'react/button-has-type': 'off',
-    }
+        'react/jsx-filename-extension': [2, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    },
 };
