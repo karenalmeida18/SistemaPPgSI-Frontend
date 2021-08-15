@@ -6,7 +6,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Input = styled.input(({ theme }) => `
-   padding: 14px 8px;
+   padding: 14px 10px;
+   background-color: transparent;
    border-radius: 4px;
    border: 1px solid ${theme.gray3};
    outline-color: ${theme.primaryBlue};
@@ -20,7 +21,7 @@ export const Input = styled.input(({ theme }) => `
 
 export const Label = styled.label(({ color, theme }) => `
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   font-size: 16px;
   color: ${color || theme.gray4};
 `);
