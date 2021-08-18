@@ -16,7 +16,6 @@ export const Input = styled.input(({ theme }) => `
    ::placeholder {
      color: ${theme.gray3};
    }
-
 `);
 
 export const Label = styled.label(({ color, theme }) => `
