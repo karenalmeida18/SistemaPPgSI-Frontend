@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import UserRegistration from './pages/UserRegistration';
 
 // Hardcode until connect with back
-const isAuthenticated = () => false;
+const isAuthenticated = () => true;
 
 // eslint-disable-next-line no-unused-vars
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -30,7 +30,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/login" exact component={Login} />
-        {/* <PrivateRoute path="/" component={() => <h1> home </h1>} /> */}
+        <PrivateRoute path="/" component={() => <h1>  </h1>} exact />
         <Route path="/user_registration" exact component={UserRegistration} />
       </Switch>
     </BrowserRouter>
