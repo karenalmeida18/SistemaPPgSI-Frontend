@@ -50,7 +50,7 @@ const UserRegistration: React.FC = () => {
         />
         <S.GridButton>
           <Button
-            text="Enviar"
+            text="Cadastrar"
             onClick={() => {}}
           />
         </S.GridButton>

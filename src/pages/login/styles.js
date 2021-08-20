@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Form = styled.form(({ theme }) => `
-   padding: 20px 65px 70px;
+   padding: 20px 65px 40px;
    display: flex;
    flex-direction: column;
    width: 500px;
@@ -35,7 +35,15 @@ export const Form = styled.form(({ theme }) => `
 `);
 
 export const Image = styled.img`
-  height: 100px;
-  width: 200px;
+  height: 120px;
   margin: 10px auto;
 `;
+
+export const CardFooter = styled.span(({ theme }) => `
+  text-align: center;
+  padding: 16px 0;
+
+   > a {
+    color: ${theme.primaryBlue};
+   }
+`);
