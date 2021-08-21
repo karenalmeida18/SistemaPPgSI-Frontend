@@ -11,14 +11,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: FC<InputProps> = ({
-  name, label, color, required, placeholder,
+  name, label, color, required, placeholder, onChange, value,
 }) => (
   <S.Wrapper>
     <S.Label color={color} htmlFor={name}>
       {label}
       {required && ' *'}
     </S.Label>
-    <S.Input id={name} placeholder={placeholder} />
+    <S.Input id={name} placeholder={placeholder} onChange={onChange} value={value} />
   </S.Wrapper>
 );
 

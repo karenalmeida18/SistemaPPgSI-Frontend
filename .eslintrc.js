@@ -26,6 +26,7 @@ module.exports = {
       ignoreUrls: true,
       ignoreStrings: true,
     }],
+    'linebreak-style': 0,
     'no-console': 'warn',
 
     'no-param-reassign': ['error', {

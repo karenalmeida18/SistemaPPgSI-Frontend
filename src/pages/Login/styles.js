@@ -1,27 +1,26 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-   background: ${(props) => props.theme.secondaryBlue};
    display: flex;
-   align-items: center;
    justify-content: center;
    padding: 10px;
    width: 100%;
-   height: 100vh;
+   height: 100%;
 `;
 
 export const Form = styled.form(({ theme }) => `
-   padding: 20px 65px 70px;
+   margin-top: 40px;
+   padding: 40px 65px;
    display: flex;
    flex-direction: column;
-   width: 500px;
+   width: 510px;
+   height: max-content;
    box-shadow: ${theme.shadow};
    border: 1px solid ${theme.gray2};
-   background-color: ${theme.gray1};
    border-radius: 4px;
 
    > div {
-     margin: 10px 0;
+     margin: 15px 0;
    }
 
    > button {
@@ -34,8 +33,22 @@ export const Form = styled.form(({ theme }) => `
    }
 `);
 
+export const Header = styled.h2(({ theme }) => `
+  text-align: center;
+  margin-bottom: 24px;
+  color: ${theme.primaryBlueDark};
+`);
+
 export const Image = styled.img`
-  height: 100px;
-  width: 200px;
+  height: 120px;
   margin: 10px auto;
 `;
+
+export const CardFooter = styled.span(({ theme }) => `
+  text-align: center;
+  padding: 16px 0;
+
+   > a {
+    color: ${theme.primaryBlue};
+   }
+`);
