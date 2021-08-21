@@ -5,6 +5,7 @@ export const pallet = {
   gray4: 'rgb(118, 118, 118)',
   white: '#fff',
   primaryBlue: '#1094ab',
+  primaryBlueDark: '#258491',
   secondaryBlue: '#64c4d2',
   yellow: '#fcb421',
   shadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',

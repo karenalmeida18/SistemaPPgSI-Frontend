@@ -5,7 +5,7 @@ import GlobalStyle from './styles/global';
 import Theme from './styles/theme';
 
 import Routes from './routes';
-import Menu from './components/menu';
+import { Menu } from './components';
 
 const App: React.FC = () => (
   <ThemeProvider theme={Theme}>

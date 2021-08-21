@@ -13,7 +13,7 @@ const Menu: React.FC = () => {
 
   return (
     <Container>
-      <LogoUSP src={LogoUsp} />
+      <LogoUSP src={LogoUsp} alt="usp university logo" />
       <GridOptions>
         <Link to="/user_registration">
           {/* Cadastro de usuários */}
