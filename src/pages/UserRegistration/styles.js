@@ -42,3 +42,11 @@ export const FormError = styled.p(({ theme }) => `
   margin-top: 10px;
   margin-bottom: -10px;
 `);
+
+export const Link = styled.div(({ theme }) => `
+  text-align: center;
+
+   > a {
+    color: ${theme.primaryBlue};
+   }
+`);

@@ -21,4 +21,5 @@ export const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
 
 export const LoadingWrapper = styled.div`
    animation: ${rotate} 2s linear infinite;
+   margin-left: 8px;
 `;

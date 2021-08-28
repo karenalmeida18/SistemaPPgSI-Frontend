@@ -1,10 +1,10 @@
 import React, { useState, SyntheticEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Input, Select } from '../../components';
-
 import * as S from './styles';
 
 import api from '../../services/axios';
-import { mapErrorsRegister } from '../../utils/errors';
+import { mapErrorsRegister } from '../../utils';
 
 const UserRegistration: React.FC = () => {
   const [userType, setUserType] = useState('');
@@ -36,18 +36,28 @@ const UserRegistration: React.FC = () => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     setError({
-      uspCode: '', password: '', general: '', userType: '', name: '',
+      uspCode: '',
+      password: '',
+      general: '',
+      userType: '',
+      name: '',
     });
 
     if (!uspCode || !password) {
       validateRequiredFields({
-        name, uspCode, password, user_type: userType,
+        name,
+        uspCode,
+        password,
+        user_type: userType,
       });
     } else {
       setLoading(true);
       try {
         await api.post('/user/create', {
-          name, usp_code: uspCode, password, userType,
+          name,
+          usp_code: uspCode,
+          password,
+          userType,
         });
       } catch (err) {
         setError({ ...error, general: mapErrorsRegister(err) });
@@ -99,13 +109,7 @@ const UserRegistration: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
-        {error.general && (
-          <S.FormError>
-            {error.general}
-          </S.FormError>
-        )}
-
+        {error.general && <S.FormError>{error.general}</S.FormError>}
         <S.GridButton>
           <Button
             type="submit"
@@ -114,6 +118,12 @@ const UserRegistration: React.FC = () => {
             onClick={() => {}}
           />
         </S.GridButton>
+
+        <S.Link>
+          Voltar para
+          <Link to="/login"> login </Link>
+        </S.Link>
+
       </S.FormCard>
     </S.Container>
   );

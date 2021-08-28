@@ -1,11 +1,12 @@
 import React, { FC, useState, SyntheticEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import * as S from './styles';
 import { Input, Button } from '../../components';
 
 import api from '../../services/axios';
-import { mapErrorsLogin } from '../../utils/errors';
+import { mapErrorsLogin, setUserToken } from '../../utils';
+import { getToken } from '../../services/auth';
 
 const Login: FC = () => {
   const [values, setValues] = useState({
@@ -47,7 +48,13 @@ const Login: FC = () => {
     else {
       setLoading(true);
       try {
-        await api.post('/user/login', values);
+        const {
+          data: {
+            user: { user_type: userType },
+            token,
+          },
+        } = await api.post('/user/login', values);
+        setUserToken({ userType, token });
       } catch (err) {
         setError({ ...error, general: mapErrorsLogin(err) });
       }
@@ -56,41 +63,40 @@ const Login: FC = () => {
   };
 
   return (
-    <S.Wrapper>
-      <S.Form onSubmit={(e) => handleSubmit(e)}>
-        <S.Header> Login </S.Header>
-        <Input
-          required
-          name="code"
-          error={error.usp_code}
-          label="Código USP"
-          placeholder="Insira seu código USP"
-          onChange={handleChange('usp_code')}
-        />
-        <Input
-          required
-          error={error.password}
-          name="password"
-          label="Senha"
-          type="password"
-          placeholder="Insira sua senha"
-          onChange={handleChange('password')}
-        />
+    <>
+      {getToken() && <Redirect to="/" />}
+      <S.Wrapper>
+        <S.Form onSubmit={(e) => handleSubmit(e)}>
+          <S.Header> Login </S.Header>
+          <Input
+            required
+            name="code"
+            error={error.usp_code}
+            label="Código USP"
+            placeholder="Insira seu código USP"
+            onChange={handleChange('usp_code')}
+          />
+          <Input
+            required
+            error={error.password}
+            name="password"
+            label="Senha"
+            type="password"
+            placeholder="Insira sua senha"
+            onChange={handleChange('password')}
+          />
 
-        {error.general && (
-          <S.FormError>
-            {error.general}
-          </S.FormError>
-        )}
+          {error.general && <S.FormError>{error.general}</S.FormError>}
 
-        <Button text="Entrar" type="submit" loading={loading} />
-        <S.CardFooter>
-          ou faça seu
-          {' '}
-          <Link to="/user_registration"> cadastro </Link>
-        </S.CardFooter>
-      </S.Form>
-    </S.Wrapper>
+          <Button text="Entrar" type="submit" loading={loading} />
+          <S.CardFooter>
+            ou faça seu
+            {' '}
+            <Link to="/user_registration"> cadastro </Link>
+          </S.CardFooter>
+        </S.Form>
+      </S.Wrapper>
+    </>
   );
 };
 
