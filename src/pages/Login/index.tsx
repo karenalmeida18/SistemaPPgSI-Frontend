@@ -62,9 +62,11 @@ const Login: FC = () => {
     }
   };
 
+  const isLogged = getToken();
+
   return (
     <>
-      {getToken() && <Redirect to="/" />}
+      {isLogged && <Redirect to="/" />}
       <S.Wrapper>
         <S.Form onSubmit={(e) => handleSubmit(e)}>
           <S.Header> Login </S.Header>
