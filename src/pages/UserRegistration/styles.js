@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding: 64px 16px;
 `;
 
-export const FormCard = styled.div`
+export const FormCard = styled.form`
   padding: 32px 0;
   width: 50%;
 
@@ -34,3 +34,11 @@ export const GridButton = styled.div`
     width: 100%;
   }
 `;
+
+export const FormError = styled.p(({ theme }) => `
+  font-weight: bold;
+  font-size: 14px;
+  color: ${theme.red};
+  margin-top: 10px;
+  margin-bottom: -10px;
+`);

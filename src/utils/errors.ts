@@ -1,21 +1,33 @@
-interface errorProps {
+interface loginErrorProps {
   response: {
-    status?: keyof typeof statusCode,
-  },
+    status?: keyof typeof statusCodeLogin;
+  };
+}
+interface registerErrorProps {
+  response: {
+    status?: keyof typeof statusCodeRegister;
+  };
 }
 
-const statusCode = {
+const statusCodeLogin = {
   403: 'Usuário não autorizado',
   400: 'Email ou senha incorretos.',
   500: 'Algo deu errado. Tente novamente em alguns minutos.',
 };
 
-export const mapErrorsLogin = (error: errorProps) => {
-  const {
-    response: {
-      status,
-    } = {},
-  } = error;
+const statusCodeRegister = {
+  400: 'Usuário já registrado.',
+  500: 'Algo deu errado. Tente novamente em alguns minutos.',
+};
 
-  return statusCode[status || 500];
+export const mapErrorsLogin = (error: loginErrorProps) => {
+  const { response: { status } = {} } = error;
+
+  return statusCodeLogin[status || 500];
+};
+
+export const mapErrorsRegister = (error: registerErrorProps) => {
+  const { response: { status } = {} } = error;
+
+  return statusCodeRegister[status || 500];
 };
