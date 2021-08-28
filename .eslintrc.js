@@ -40,6 +40,7 @@ module.exports = {
       mjs: 'never',
       jsx: 'never',
       tsx: 'never',
+      ts: 'never',
     }],
     'one-var': 'off',
     'import/prefer-default-export': 'off',
