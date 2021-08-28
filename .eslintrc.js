@@ -27,7 +27,7 @@ module.exports = {
       ignoreStrings: true,
     }],
     'linebreak-style': 0,
-    'no-console': 'warn',
+    'no-console': 'off',
 
     'no-param-reassign': ['error', {
       ignorePropertyModificationsFor: ['state'],

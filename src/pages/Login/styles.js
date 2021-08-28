@@ -52,3 +52,11 @@ export const CardFooter = styled.span(({ theme }) => `
     color: ${theme.primaryBlue};
    }
 `);
+
+export const FormError = styled.p(({ theme }) => `
+  font-weight: bold;
+  font-size: 14px;
+  color: ${theme.red};
+  margin-top: 10px;
+  margin-bottom: -20px;
+`);

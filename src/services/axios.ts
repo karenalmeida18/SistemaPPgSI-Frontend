@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './auth';
 
 const apiConfig = axios.create({
-  baseURL: process.env.baseURL,
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 apiConfig.interceptors.request.use(async (config) => {

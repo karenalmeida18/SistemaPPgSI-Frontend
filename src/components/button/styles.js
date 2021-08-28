@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { rotate } from '../../styles/animations';
 
-const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
+export const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
+   display: flex;
+   justify-content: center;
    border: 0;
    padding: 14px 8px;
    border-radius: 4px;
@@ -10,9 +13,12 @@ const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
    font-weight: bold;
    transition: all .2s;
 
-   &:hover {
-     background-color: #2f9eaf ;
+   &:hover, &:disabled {
+     background-color: #80ccd6 ;
    }
+
 `);
 
-export default StyledButton;
+export const LoadingWrapper = styled.div`
+   animation: ${rotate} 2s linear infinite;
+`;
