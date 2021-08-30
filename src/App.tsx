@@ -7,14 +7,18 @@ import Theme from './styles/theme';
 import Routes from './routes';
 import { Menu } from './components';
 
+import AppProvider from './contexts/AppContext';
+
 const App: React.FC = () => (
-  <ThemeProvider theme={Theme}>
-    <Router>
-      <Menu />
-      <Routes />
-    </Router>
-    <GlobalStyle />
-  </ThemeProvider>
+  <AppProvider>
+    <ThemeProvider theme={Theme}>
+      <Router>
+        <Menu />
+        <Routes />
+      </Router>
+      <GlobalStyle />
+    </ThemeProvider>
+  </AppProvider>
 );
 
 export default App;

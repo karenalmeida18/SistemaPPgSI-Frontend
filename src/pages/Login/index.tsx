@@ -1,12 +1,15 @@
-import React, { FC, useState, SyntheticEvent } from 'react';
+import React, {
+  FC, useState, SyntheticEvent, useContext,
+} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import * as S from './styles';
 import { Input, Button } from '../../components';
 
 import api from '../../services/axios';
-import { mapErrorsLogin, setUserToken } from '../../utils';
-import { getToken } from '../../services/auth';
+import { mapErrorsLogin } from '../../utils';
+
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Login: FC = () => {
   const [values, setValues] = useState({
@@ -19,6 +22,7 @@ const Login: FC = () => {
     general: '',
   });
   const [loading, setLoading] = useState(false);
+  const { signIn, userLogged } = useContext(AuthContext);
 
   const handleChange = (prop: string) => (event: {
     target: HTMLInputElement
@@ -50,11 +54,11 @@ const Login: FC = () => {
       try {
         const {
           data: {
-            user: { user_type: userType },
+            user,
             token,
           },
         } = await api.post('/user/login', values);
-        setUserToken({ userType, token });
+        signIn({ user, token });
       } catch (err) {
         setError({ ...error, general: mapErrorsLogin(err) });
       }
@@ -62,7 +66,7 @@ const Login: FC = () => {
     }
   };
 
-  const isLogged = getToken();
+  const isLogged = !!userLogged?.id;
 
   return (
     <>

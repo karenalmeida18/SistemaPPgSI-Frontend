@@ -30,6 +30,7 @@ module.exports = {
     }],
     'linebreak-style': 0,
     'no-console': 'off',
+    camelcase: 'off',
 
     'no-param-reassign': ['error', {
       ignorePropertyModificationsFor: ['state'],

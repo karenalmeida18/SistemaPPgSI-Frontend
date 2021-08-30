@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import LogoUsp from '../../assets/usp-logo.png';
 
@@ -6,10 +6,13 @@ import {
   Container, LogoUSP, GridOptions, Button,
 } from './styles';
 
-import { getToken } from '../../services/auth';
+// import { getToken } from '../../services/auth';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Menu: React.FC = () => {
-  const isLogged = getToken();
+  const { userLogged, signOut } = useContext(AuthContext);
+
+  const isLogged = !!userLogged?.id;
 
   return (
     <Container>
@@ -21,10 +24,7 @@ const Menu: React.FC = () => {
       {isLogged && (
         /* temporary  until connect with context to know how token clear */
         <Button
-          onClick={() => {
-            localStorage.clear();
-            window.location.reload();
-          }}
+          onClick={() => signOut()}
         >
           Sair
         </Button>

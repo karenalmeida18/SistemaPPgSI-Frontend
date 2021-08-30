@@ -10,5 +10,5 @@ export const getToken = () => {
   if (isAdminAuthenticated()) return localStorage.getItem(TOKEN_ADMIN);
   if (isStudentAuthenticated()) return localStorage.getItem(TOKEN_STUDENT);
   if (isAdvisorAuthenticated()) return localStorage.getItem(TOKEN_ADVISOR);
-  return false;
+  return null;
 };

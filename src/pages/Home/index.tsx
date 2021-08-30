@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { getToken } from '../../services/auth';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Home = () => {
-  const isLogged = getToken();
+  const { userLogged: { id: isLogged = null } = {} } = useContext(AuthContext);
 
   return (
     <>
