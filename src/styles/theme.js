@@ -8,6 +8,7 @@ export const pallet = {
   primaryBlueDark: '#258491',
   secondaryBlue: '#64c4d2',
   yellow: '#fcb421',
+  red: '#e82727',
   shadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
   shadow2: 'rgba(0, 0, 0, 0.10) 0px 1px 4px',
 };

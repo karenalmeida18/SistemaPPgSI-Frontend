@@ -1,21 +1,21 @@
-import { createContext, ReactNode } from 'react';
+import React from 'react';
 
-interface AppContextData {
+import { AuthProvider } from './AuthContext';
+
+/* interface AppContextData {
 
 }
 
 interface AppContextProps{
   children: ReactNode;
-}
+} */
 
-export const AppContext = createContext({} as AppContextData);
+// export const AppContext = createContext({} as AppContextData);
 
-// eslint-disable-next-line arrow-body-style
-export const AppProvider = ({ children }: AppContextProps) => {
-  return (
-    // eslint-disable-next-line react/react-in-jsx-scope
-    <AppContext.Provider value={{}}>
-      {children}
-    </AppContext.Provider>
-  );
-};
+const AppProvider: React.FC = ({ children }) => (
+  <AuthProvider>
+    {children}
+  </AuthProvider>
+);
+
+export default AppProvider;

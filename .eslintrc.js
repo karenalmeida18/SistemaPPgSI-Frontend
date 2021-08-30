@@ -11,6 +11,8 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
+      experimentalObjectRestSpread: true,
     },
     ecmaVersion: 12,
     sourceType: 'module',
@@ -27,7 +29,8 @@ module.exports = {
       ignoreStrings: true,
     }],
     'linebreak-style': 0,
-    'no-console': 'warn',
+    'no-console': 'off',
+    camelcase: 'off',
 
     'no-param-reassign': ['error', {
       ignorePropertyModificationsFor: ['state'],
@@ -40,6 +43,7 @@ module.exports = {
       mjs: 'never',
       jsx: 'never',
       tsx: 'never',
+      ts: 'never',
     }],
     'one-var': 'off',
     'import/prefer-default-export': 'off',

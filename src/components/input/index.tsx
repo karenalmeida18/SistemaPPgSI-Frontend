@@ -8,18 +8,38 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string
   color?: string
   required?: boolean
+  error?: string
 }
 
 const Input: FC<InputProps> = ({
-  name, label, color, required, placeholder, onChange, value,
-}) => (
-  <S.Wrapper>
-    <S.Label color={color} htmlFor={name}>
-      {label}
-      {required && ' *'}
-    </S.Label>
-    <S.Input id={name} placeholder={placeholder} onChange={onChange} value={value} />
-  </S.Wrapper>
-);
+  name,
+  label,
+  required,
+  placeholder,
+  onChange,
+  value,
+  error,
+  color,
+}) => {
+  const inputPropStyles = { error };
+  return (
+    <S.Wrapper>
+      <S.Label htmlFor={name} color={color}>
+        {label}
+        {required && ' *'}
+      </S.Label>
+      <S.Input
+        /* eslint-disable-next-line react/jsx-props-no-spreading */
+        {...inputPropStyles}
+        id={name}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        required={required}
+      />
+      {error && <S.Error>{error}</S.Error>}
+    </S.Wrapper>
+  );
+};
 
 export default Input;
