@@ -105,6 +105,7 @@ const UserRegistration: React.FC = () => {
           error={error.password}
           name="password"
           label="Senha"
+          type="password"
           placeholder="Insira sua senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

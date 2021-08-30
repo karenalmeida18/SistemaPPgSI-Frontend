@@ -5,13 +5,31 @@ export const Wrapper = styled.div`
    flex-direction: column;
 `;
 
-export const Input = styled.input(({ theme, error }) => `
+export const InputWrapper = styled.div(({ theme, error }) => `
+   position: relative;
+   display: flex;
+   align-items: center;
+
+   > svg {
+     position: absolute;
+     right: 0;
+     width: 25px;
+     height: 25px;
+     color: gray;
+     margin-right: 10px;
+     cursor: pointer;
+   }
+`);
+
+export const Input = styled.input(({ theme, error, type }) => `
    padding: 14px 10px;
+   width: 100%;
    background-color: transparent;
    border-radius: 4px;
    outline-color: ${theme.primaryBlue};
    outline-width: thin;
    border: 1px solid ${error ? theme.red : theme.gray3};
+   padding-right: ${type === 'password' && '40px'};
 
    ::placeholder {
      color: ${theme.gray3};
