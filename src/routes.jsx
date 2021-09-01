@@ -5,6 +5,7 @@ import {
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Form from './pages/Form';
 import UserRegistration from './pages/UserRegistration';
 
 import { isAdminAuthenticated, isAdvisorAuthenticated, isStudentAuthenticated } from './services/auth';
@@ -63,6 +64,7 @@ export default function Routes() {
         <LoggedRoute path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/user_registration" exact component={UserRegistration} />
+        <StudentRoute path="/form" exact component={Form} />
       </Switch>
     </BrowserRouter>
   );
