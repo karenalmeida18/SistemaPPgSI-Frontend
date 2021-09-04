@@ -70,4 +70,14 @@ export const Card = styled.div(({ theme }) => `
   &:hover {
     box-shadow: ${theme.shadow3};
   }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+
+    > p {
+      font-size: 14px;
+    }
+  }
 `);
