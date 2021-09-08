@@ -10,6 +10,7 @@ export const Container = styled.div(({ theme }) => `
 
   width: 100%;
   background: ${theme.secondaryBlue};
+  box-shadow: ${theme.shadow2};
 `);
 
 export const LogoUSP = styled.img`

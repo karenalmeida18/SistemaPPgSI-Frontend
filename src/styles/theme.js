@@ -4,6 +4,7 @@ export const pallet = {
   gray3: '#b5b5b5',
   gray4: 'rgb(118, 118, 118)',
   white: '#fff',
+  black: '#000000',
   primaryBlue: '#1094ab',
   primaryBlueDark: '#258491',
   secondaryBlue: '#64c4d2',
@@ -11,6 +12,7 @@ export const pallet = {
   red: '#e82727',
   shadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
   shadow2: 'rgba(0, 0, 0, 0.10) 0px 1px 4px',
+  shadow3: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
 };
 
 const Theme = () => (

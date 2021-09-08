@@ -9,6 +9,8 @@ export default createGlobalStyle`
   html, body, #root {
      -webkit-font-smoothing: antialiased !important;
      font-family: 'Montserrat', sans-serif;
+     width: 100%;
+     height: 100%;
   }
   button {
     cursor : pointer;
