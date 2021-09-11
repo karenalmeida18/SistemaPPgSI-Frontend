@@ -3,6 +3,7 @@ interface loginErrorProps {
     status?: keyof typeof statusCodeLogin;
   };
 }
+
 interface registerErrorProps {
   response: {
     status?: keyof typeof statusCodeRegister;
@@ -11,7 +12,7 @@ interface registerErrorProps {
 
 const statusCodeLogin = {
   403: 'Usuário não autorizado',
-  400: 'Email ou senha incorretos.',
+  400: 'Código USP ou senha incorretos.',
   500: 'Algo deu errado. Tente novamente em alguns minutos.',
 };
 

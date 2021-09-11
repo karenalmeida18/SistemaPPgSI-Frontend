@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LogoUsp from '../../assets/usp-logo.png';
 
 import {
@@ -14,6 +14,8 @@ const Menu: React.FC = () => {
 
   const isLogged = !!userLogged?.id;
 
+  const history = useHistory();
+
   return (
     <Container>
       <LogoUSP src={LogoUsp} alt="usp university logo" />
@@ -24,7 +26,11 @@ const Menu: React.FC = () => {
       {isLogged && (
         /* temporary  until connect with context to know how token clear */
         <Button
-          onClick={() => signOut()}
+          onClick={() => {
+            history.push('/login');
+            window.location.reload();
+            signOut();
+          }}
         >
           Sair
         </Button>
