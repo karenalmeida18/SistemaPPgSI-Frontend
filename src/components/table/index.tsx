@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import * as S from './styles';
 
@@ -7,6 +7,7 @@ interface tableProps {
     text: string
     id: string,
     width?: string,
+    render?(item: Object, value: string): ReactElement,
   }[]
   items: {
     [key: string]: string;
@@ -23,14 +24,14 @@ const Table: React.FC<tableProps> = ({ columns, items }) => (
     </S.TableRow>
     {items.map((item) => (
       <S.TableRow>
-        {columns.map(({ id, text }) => (
+        {columns.map(({ id, text, render }) => (
           <S.TableCell key={id}>
             <span aria-labelledby={text} className="table-mobile">
               {text}
               :
               {' '}
             </span>
-            <span id={text}>{item[id]}</span>
+            <span id={text}>{render ? render(item, item[id]) : item[id]}</span>
           </S.TableCell>
         ))}
       </S.TableRow>
