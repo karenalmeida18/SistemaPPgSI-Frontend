@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import UserRegistration from './pages/UserRegistration';
 
+import Evaluation from './pages/Views/Evaluation';
+
 import { isAdminAuthenticated, isAdvisorAuthenticated, isStudentAuthenticated } from './services/auth';
 
 // react/jsx-props-no-spreading
@@ -63,6 +65,7 @@ export default function Routes() {
         <LoggedRoute path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/user_registration" exact component={UserRegistration} />
+        <Evaluation path="/evaluation" component={Evaluation} />
       </Switch>
     </BrowserRouter>
   );

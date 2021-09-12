@@ -1,4 +1,4 @@
-# PPJSI System
+# PPGSI System
 
 Projeto desenvolvido para disciplina de Engenharia de Software I, um sistema que auxilia a avaliação do programa de pós graduação de alunos de Sistemas de informação - USP.
 
