@@ -11,7 +11,7 @@ export const Container = styled.div(({ theme }) => `
 `);
 
 export const Content = styled.div(({ theme }) => `
-  padding: 10px;
+  padding: 20px;
   background-color: ${theme.white};
   box-shadow: ${theme.shadow};
   border-radius: 4px;
@@ -26,14 +26,16 @@ export const Content = styled.div(({ theme }) => `
 
 export const Header = styled.header(({ theme }) => `
    width: 100%;
+   color: ${theme.primaryBlueDark};
    display: flex;
    justify-content: space-between;
+   margin-bottom: 24px;
 
    > svg {
      cursor: pointer;
      font-size: 20px;
      &:hover {
-       color: ${theme.primaryBlue};
+       color: ${theme.secondaryBlue};
      }
    }
 `);

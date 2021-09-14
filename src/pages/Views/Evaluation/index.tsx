@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsEye } from 'react-icons/bs';
 
-import { Table, Modal } from '../../../components';
+import NewEvaluationModal from './NewEvaluationModal';
 
 import * as S from './styles';
 
-const items = [
-  {
-    name: 'Karen',
-    usp_code: '18',
-    updated_at: '',
-    advisor_note: '',
-    ccp_note: '',
-  },
-  {
-    name: 'Maykon',
-    usp_code: '20',
-    updated_at: '',
-    advisor_note: '',
-    ccp_note: '',
-  },
-];
+import { Table, Modal } from '../../../components';
+
+import api from '../../../services/axios';
+
+interface EvaluationData {
+  users: {
+    usp_code?: string
+    name?: string
+  }
+}
+interface EvaluationResponse {
+  data: EvaluationData[]
+}
 
 const Evaluation: React.FC = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [items, setItems] = useState([]);
+  const [userOpen, setUserOpen] = useState({});
+
+  useEffect(() => {
+    async function loadEvaluations() {
+      const { data } = (await api.get('evaluate/list/1')) as EvaluationResponse;
+      const dataFormatted = data.map(
+        ({ users: { usp_code, name }, ...item }) => ({
+          ...item,
+          name,
+          usp_code,
+        }),
+      );
+      setItems(dataFormatted as []);
+    }
+
+    loadEvaluations();
+  }, []);
+
+  const openModal = (item: Object) => {
+    setUserOpen(item);
+    setIsModalVisible(true);
+  };
 
   const columns = [
     {
@@ -37,38 +57,49 @@ const Evaluation: React.FC = () => {
       width: '20%',
     },
     {
-      id: 'updated_at',
-      text: 'Data de resposta',
-      width: '15%',
-    },
-    {
-      id: 'advisor_note',
+      id: 'note_advisor',
       text: 'Nota orientador',
       width: '15%',
     },
     {
-      id: 'ccp_note',
+      id: 'note_ccp',
       text: 'Nota ccp',
-      width: '10%',
+      width: '15%',
     },
     {
       id: 'actions',
       text: 'Ações',
-      width: '10%',
-      render: () => (
-        <BsEye
-          onClick={() => setOpenModal(true)}
-          style={{ cursor: 'pointer', color: '#1094ab', fontSize: '20px' }}
-        />
+      width: '20%',
+      render: (item: Object, value: string) => (
+        <button
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: 'white',
+            border: '1px solid lightgray',
+            padding: '0 8px',
+          }}
+          onClick={() => openModal(item)}
+        >
+          <BsEye
+            style={{
+              cursor: 'pointer',
+              color: '#1094ab',
+              fontSize: '18px',
+              marginRight: '5px',
+            }}
+          />
+          Ver mais
+        </button>
       ),
     },
   ];
 
   return (
     <>
-      {openModal && (
-        <Modal closeModal={() => setOpenModal(false)}>
-          <h1> teste </h1>
+      {isModalVisible && (
+        <Modal title="Avaliar aluno" closeModal={() => setIsModalVisible(false)}>
+          <NewEvaluationModal user={userOpen} />
         </Modal>
       )}
       <S.Container>
