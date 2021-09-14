@@ -38,7 +38,7 @@ const ccp = [
     title: 'Tabela',
     description: 'Verificar respostas de formulário por aluno, e contabilizar avaliação.',
     Icon: BsReverseLayoutTextSidebarReverse,
-    route: '/',
+    route: '/evaluation',
   },
   {
     title: 'Formulário',
@@ -59,7 +59,7 @@ const advisor = [
     title: 'Tabela',
     description: 'Verificar respostas de formulário por aluno, e contabilizar avaliação.',
     Icon: BsReverseLayoutTextSidebarReverse,
-    route: '/',
+    route: '/evaluation',
   },
 ];
 

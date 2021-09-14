@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div(({ theme }) => `
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   z-index: 10;
   display: flex;
@@ -17,7 +17,9 @@ export const Content = styled.div(({ theme }) => `
   border-radius: 4px;
   min-width: 400px;
   height: max-content;
+  max-height: 100%;
   margin-top: 10px;
+  overflow-y: scroll;
 
   @media (max-width: 800px) {
     min-width: 100%;

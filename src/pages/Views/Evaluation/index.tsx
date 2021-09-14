@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BsEye } from 'react-icons/bs';
+import { BsEye, BsPencil } from 'react-icons/bs';
 
+import ListQuestionsModal from './ListQuestionsModal';
 import NewEvaluationModal from './NewEvaluationModal';
 
 import * as S from './styles';
@@ -20,7 +21,9 @@ interface EvaluationResponse {
 }
 
 const Evaluation: React.FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEvaluationModalVisible, setIsEvaluationModalVisible] = useState(false);
+  const [isQuestionModalVisible, setIsQuestionModalVisible] = useState(false);
+
   const [items, setItems] = useState([]);
   const [userOpen, setUserOpen] = useState({});
 
@@ -40,9 +43,14 @@ const Evaluation: React.FC = () => {
     loadEvaluations();
   }, []);
 
-  const openModal = (item: Object) => {
+  const openEvaluationModal = (item: Object) => {
     setUserOpen(item);
-    setIsModalVisible(true);
+    setIsEvaluationModalVisible(true);
+  };
+
+  const openQuestionsModal = (item: Object) => {
+    setUserOpen(item);
+    setIsQuestionModalVisible(true);
   };
 
   const columns = [
@@ -71,42 +79,77 @@ const Evaluation: React.FC = () => {
       text: 'Ações',
       width: '20%',
       render: (item: Object, value: string) => (
-        <button
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            border: '1px solid lightgray',
-            padding: '0 8px',
-          }}
-          onClick={() => openModal(item)}
-        >
-          <BsEye
+        <div style={{ display: 'flex' }}>
+          <button
             style={{
-              cursor: 'pointer',
-              color: '#1094ab',
-              fontSize: '18px',
-              marginRight: '5px',
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: 'white',
+              border: '1px solid lightgray',
+              padding: '0 8px',
             }}
-          />
-          Ver mais
-        </button>
+            onClick={() => openQuestionsModal(item)}
+          >
+            <BsEye
+              style={{
+                cursor: 'pointer',
+                color: '#1094ab',
+                fontSize: '18px',
+                marginRight: '5px',
+              }}
+            />
+            Ver mais
+          </button>
+          <button
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: 'white',
+              border: '1px solid lightgray',
+              padding: '0 8px',
+              marginLeft: '8px',
+            }}
+            onClick={() => openEvaluationModal(item)}
+          >
+            <BsPencil
+              style={{
+                cursor: 'pointer',
+                color: '#1094ab',
+                fontSize: '18px',
+                marginRight: '5px',
+              }}
+            />
+            Avaliar
+          </button>
+        </div>
       ),
     },
   ];
 
   return (
     <>
-      {isModalVisible && (
-        <Modal title="Avaliar aluno" closeModal={() => setIsModalVisible(false)}>
-          <NewEvaluationModal user={userOpen} />
+      {isQuestionModalVisible && (
+        <Modal
+          title="Informações"
+          closeModal={() => setIsQuestionModalVisible(false)}
+        >
+          <ListQuestionsModal user={userOpen} />
         </Modal>
       )}
+
+      {isEvaluationModalVisible && (
+        <Modal
+          title="Avaliar aluno"
+          closeModal={() => setIsEvaluationModalVisible(false)}
+        >
+          <NewEvaluationModal user={userOpen} closeModal={() => setIsEvaluationModalVisible(false)} />
+        </Modal>
+      )}
+
       <S.Container>
         <S.Header>
           {' '}
           <h2> Avaliações </h2>
-          {' '}
         </S.Header>
         <Table columns={columns} items={items} />
       </S.Container>

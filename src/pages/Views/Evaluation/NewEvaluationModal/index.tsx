@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, SyntheticEvent, useContext } from 'react';
 
 import * as S from './styles';
 
-import { Loading } from '../../../../components';
+import { Input, Button } from '../../../../components';
 
 import api from '../../../../services/axios';
+
+import { AuthContext } from '../../../../contexts/AuthContext';
 
 interface NewEvaluationProps {
   user: {
@@ -12,29 +14,39 @@ interface NewEvaluationProps {
     usp_code?: string
     user_id?: number
   }
+  closeModal(): void,
 }
 
 const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
-  user: { name, usp_code, user_id },
+  user: {
+    name, usp_code, user_id,
+  },
+  closeModal,
 }) => {
-  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState({});
 
-  useEffect(() => {
-    async function loadQuestions() {
-      setLoading(true);
-      try {
-        const { data } = await api.get('question/readByUserId/1', {
-          params: { user_id },
-        });
-        setQuestions(data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-      }
+  const { userLogged: { user_type = '' } = {} } = useContext(AuthContext);
+
+  const handleSubmit = async (e: SyntheticEvent) => {
+    setLoading(true);
+    try {
+      await api.post('evaluate/create/1', {
+        user_id,
+        ...values,
+      });
+      setLoading(false);
+      closeModal();
+    } catch (err) {
+      setLoading(false);
     }
-    if (!questions || questions.length === 0) loadQuestions();
-  }, []);
+  };
+
+  const handleChange = (prop: string) => (event: {
+    target: HTMLInputElement
+  }) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   return (
     <S.Container>
@@ -50,19 +62,47 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
         </p>
       </S.Header>
 
-      <S.Subtitle>Respostas</S.Subtitle>
-      <Loading isLoading={loading} />
+      <S.Subtitle>Adicionar avaliação</S.Subtitle>
 
-      {!loading && questions.map(({ description, answers = [], id }, index) => (
-        <S.Question key={id}>
-          <p>
-            <b>{`${index + 1} - ${description}`}</b>
-          </p>
-          {answers.map(({ answer }) => (
-            <p>{answer}</p>
-          ))}
-        </S.Question>
-      ))}
+      <S.Form onSubmit={(e) => handleSubmit(e)}>
+        {user_type === 'advisor' ? (
+          <>
+            <Input
+              required
+              name="note_advisor"
+              label="Nota"
+              placeholder="Insira a nota do aluno"
+              onChange={handleChange('note_advisor')}
+            />
+
+            <Input
+              name="selfguard_advisor"
+              label="Ressalva"
+              placeholder="Insira a ressalva"
+              onChange={handleChange('note_advisor')}
+            />
+          </>
+        ) : (
+          <>
+            <Input
+              required
+              name="note_ccp"
+              label="Nota"
+              placeholder="Insira a nota do aluno"
+              onChange={handleChange('note_advisor')}
+            />
+
+            <Input
+              name="selfguard_ccp"
+              label="Ressalva"
+              placeholder="Insira a ressalva"
+              onChange={handleChange('note_advisor')}
+            />
+          </>
+        )}
+
+        <Button text="Enviar" type="submit" loading={loading} />
+      </S.Form>
     </S.Container>
   );
 };
