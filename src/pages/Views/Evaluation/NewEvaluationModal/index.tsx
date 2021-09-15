@@ -29,6 +29,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
   const { userLogged: { user_type = '' } = {} } = useContext(AuthContext);
 
   const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
     setLoading(true);
     try {
       await api.post('evaluate/create/1', {
@@ -37,6 +38,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
       });
       setLoading(false);
       closeModal();
+      window.location.reload();
     } catch (err) {
       setLoading(false);
     }
@@ -79,7 +81,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
               name="selfguard_advisor"
               label="Ressalva"
               placeholder="Insira a ressalva"
-              onChange={handleChange('note_advisor')}
+              onChange={handleChange('selfguard_advisor')}
             />
           </>
         ) : (
@@ -89,14 +91,14 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
               name="note_ccp"
               label="Nota"
               placeholder="Insira a nota do aluno"
-              onChange={handleChange('note_advisor')}
+              onChange={handleChange('note_ccp')}
             />
 
             <Input
               name="selfguard_ccp"
               label="Ressalva"
               placeholder="Insira a ressalva"
-              onChange={handleChange('note_advisor')}
+              onChange={handleChange('selfguard_ccp')}
             />
           </>
         )}
