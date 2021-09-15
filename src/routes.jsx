@@ -5,6 +5,7 @@ import {
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Form from './pages/Form';
 import UserRegistration from './pages/UserRegistration';
 
 import Evaluation from './pages/Views/Evaluation';
@@ -66,6 +67,7 @@ export default function Routes() {
         <Route path="/login" exact component={Login} />
         <Route path="/user_registration" exact component={UserRegistration} />
         <Evaluation path="/evaluation" component={Evaluation} />
+        <StudentRoute path="/form" exact component={Form} />
       </Switch>
     </BrowserRouter>
   );

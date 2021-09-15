@@ -1,23 +1,22 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from './styles/global';
-import Theme from './styles/theme';
+import ThemeMain from './styles/themeMain';
 
 import Routes from './routes';
-import { Menu } from './components';
+import { AppBar } from './components';
 
 import AppProvider from './contexts/AppContext';
 
 const App: React.FC = () => (
   <AppProvider>
-    <ThemeProvider theme={Theme}>
+    <ThemeMain>
       <Router>
-        <Menu />
+        <AppBar />
         <Routes />
       </Router>
       <GlobalStyle />
-    </ThemeProvider>
+    </ThemeMain>
   </AppProvider>
 );
 

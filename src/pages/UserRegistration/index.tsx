@@ -65,7 +65,6 @@ const UserRegistration: React.FC = () => {
       setLoading(false);
     }
   };
-
   return (
     <S.Container>
       <S.GridTitle> CADASTRO DE USUÁRIOS </S.GridTitle>
@@ -116,7 +115,6 @@ const UserRegistration: React.FC = () => {
             type="submit"
             loading={loading}
             text="Cadastrar"
-            onClick={() => {}}
           />
         </S.GridButton>
 
