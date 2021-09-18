@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FaWpforms } from 'react-icons/fa';
+import { MdArrowBack } from 'react-icons/md';
 
 import * as S from './styles';
 
@@ -48,6 +49,11 @@ const ListFormsModal: React.FC<ListFormsProps> = () => {
 
   return (
     <S.Container>
+      <S.Return onClick={() => history.push('/')} aria-label="voltar">
+        <MdArrowBack size={20} />
+        <span>Voltar</span>
+      </S.Return>
+
       <S.Header>
         <h3>Formulários</h3>
         <h4>

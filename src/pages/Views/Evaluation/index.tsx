@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { BsEye, BsPencil } from 'react-icons/bs';
+import { MdArrowBack } from 'react-icons/md';
 
 import ListQuestionsModal from './ListQuestionsModal';
 import NewEvaluationModal from './NewEvaluationModal';
@@ -47,6 +49,7 @@ const Evaluation: React.FC<EvaluationProps> = ({
   const [items, setItems] = useState([]);
   const [userOpen, setUserOpen] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     async function loadEvaluations() {
@@ -194,6 +197,10 @@ const Evaluation: React.FC<EvaluationProps> = ({
       )}
 
       <S.Container>
+        <S.Return onClick={() => history.push('/evaluation')} aria-label="voltar">
+          <MdArrowBack size={20} />
+          <span>Voltar</span>
+        </S.Return>
         <S.Header>
           {' '}
           <h2> Avaliações </h2>

@@ -21,3 +21,20 @@ export const Header = styled.header(({ theme }) => `
       color: ${theme.gray4};
    }
 `);
+
+export const Return = styled.div(({ theme }) => `
+  position: absolute;
+  left: 12px;
+  top: 68px;
+  color: ${theme.primaryBlue};
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  span {
+    padding: 0 16px;
+  }
+`);
