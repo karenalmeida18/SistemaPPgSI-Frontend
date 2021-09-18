@@ -14,10 +14,7 @@ export const Container = styled.div(({ theme }) => `
 
 export const LogoUSP = styled.img`
   height: 100%;
-`;
-
-export const GridOptions = styled.nav`
-
+  cursor: pointer;
 `;
 
 export const Button = styled.button(({ theme }) => `

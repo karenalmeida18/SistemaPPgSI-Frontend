@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import LogoUsp from '../../assets/usp-logo.png';
 
 import {
-  Container, LogoUSP, GridOptions, Button,
+  Container, LogoUSP, Button,
 } from './styles';
 
 // import { getToken } from '../../services/auth';
@@ -18,11 +18,15 @@ const Menu: React.FC = () => {
 
   return (
     <Container>
-      <LogoUSP src={LogoUsp} alt="usp university logo" />
-      <GridOptions>
-        <Link to="/user_registration">{/* Cadastro de usuários */}</Link>
-      </GridOptions>
-
+      <LogoUSP
+        src={LogoUsp}
+        alt="usp university logo"
+        aria-label="voltar para a página principal"
+        onClick={() => {
+          history.push('/');
+          window.location.reload();
+        }}
+      />
       {isLogged && (
         /* temporary  until connect with context to know how token clear */
         <Button

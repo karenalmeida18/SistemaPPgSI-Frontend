@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+export const Box = styled.div(({ theme }) => `
+  background-color: ${theme.gray1};
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`);
+
 export const Table = styled.table(({ theme }) => `
   box-shadow: ${theme.shadow};
   border-radius: 4px;

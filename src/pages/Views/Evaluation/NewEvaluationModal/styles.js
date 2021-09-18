@@ -17,14 +17,21 @@ export const Container = styled.div(({ theme }) => `
 `);
 
 export const Header = styled.header(({ theme }) => `
-   display: flex;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   background-color: ${theme.secondaryBlueLight};
    width: 100%;
    margin-bottom: 18px;
+   border-radius: 4px;
+   padding: 10px;
 
    > p {
-      &:last-child {
-         margin-left: 16px;
-      }
+      margin: 5px 0;
+   }
+
+   @media (max-width: 800px) {
+      display: flex;
+      flex-direction: column;
    }
 `);
 
@@ -39,6 +46,7 @@ export const Subtitle = styled.h4(({ theme }) => `
 export const Form = styled.form(({ theme }) => `
    display: flex;
    flex-direction: column;
+   padding-bottom: 18px;
 
    > div {
      margin: 8px 0;
@@ -51,4 +59,12 @@ export const Form = styled.form(({ theme }) => `
    > button {
      margin-top: 24px;
    }
+`);
+
+export const FormError = styled.p(({ theme }) => `
+  font-weight: bold;
+  font-size: 14px;
+  color: ${theme.red};
+  margin-top: 10px;
+  margin-bottom: -20px;
 `);

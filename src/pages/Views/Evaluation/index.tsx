@@ -11,6 +11,7 @@ import { Table, Modal } from '../../../components';
 import api from '../../../services/axios';
 
 interface EvaluationData {
+  user_id: string,
   users: {
     usp_code?: string
     name?: string
@@ -20,24 +21,39 @@ interface EvaluationResponse {
   data: EvaluationData[]
 }
 
+interface UserData {
+  id: string,
+}
+interface UserResponse {
+  data: UserData[]
+}
+
 const Evaluation: React.FC = () => {
   const [isEvaluationModalVisible, setIsEvaluationModalVisible] = useState(false);
   const [isQuestionModalVisible, setIsQuestionModalVisible] = useState(false);
 
   const [items, setItems] = useState([]);
   const [userOpen, setUserOpen] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function loadEvaluations() {
-      const { data } = (await api.get('evaluate/list/1')) as EvaluationResponse;
-      const dataFormatted = data.map(
-        ({ users: { usp_code, name }, ...item }) => ({
-          ...item,
-          name,
-          usp_code,
-        }),
-      );
-      setItems(dataFormatted as []);
+      try {
+        setIsLoading(true);
+        const { data: userList } = (await api.get('user/read')) as UserResponse;
+        const { data: evaluateList } = (await api.get('evaluate/list/1')) as EvaluationResponse;
+        const dataFormatted = userList.map((user) => {
+          const evaluation = evaluateList.find(({ user_id }) => user_id === user.id);
+          return {
+            ...user,
+            ...evaluation,
+          };
+        });
+        setItems(dataFormatted as []);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
     }
 
     loadEvaluations();
@@ -57,27 +73,37 @@ const Evaluation: React.FC = () => {
     {
       id: 'name',
       text: 'Nome',
-      width: '30%',
+      width: '20%',
     },
     {
       id: 'usp_code',
       text: 'Código USP',
-      width: '20%',
+      width: '15%',
     },
     {
       id: 'note_advisor',
       text: 'Nota orientador',
+      width: '10%',
+    },
+    {
+      id: 'selfguard_advisor',
+      text: 'Ressalva Orientador',
       width: '15%',
     },
     {
       id: 'note_ccp',
-      text: 'Nota ccp',
+      text: 'Nota CCP',
+      width: '10%',
+    },
+    {
+      id: 'selfguard_ccp',
+      text: 'Ressalva CCP',
       width: '15%',
     },
     {
       id: 'actions',
       text: 'Ações',
-      width: '20%',
+      width: '15%',
       render: (item: Object, value: string) => (
         <div style={{ display: 'flex' }}>
           <button
@@ -151,7 +177,7 @@ const Evaluation: React.FC = () => {
           {' '}
           <h2> Avaliações </h2>
         </S.Header>
-        <Table columns={columns} items={items} />
+        <Table isLoading={isLoading} columns={columns} items={items} />
       </S.Container>
     </>
   );
