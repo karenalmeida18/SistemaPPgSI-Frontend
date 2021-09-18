@@ -10,8 +10,16 @@ import { Table, Modal } from '../../../components';
 
 import api from '../../../services/axios';
 
+interface EvaluationProps {
+  location: {
+    state: {
+      form_id?: number
+    }
+  }
+}
+
 interface EvaluationData {
-  user_id: string,
+  user_id: string
   users: {
     usp_code?: string
     name?: string
@@ -22,14 +30,18 @@ interface EvaluationResponse {
 }
 
 interface UserData {
-  id: string,
+  id: string
 }
 interface UserResponse {
   data: UserData[]
 }
 
-const Evaluation: React.FC = () => {
-  const [isEvaluationModalVisible, setIsEvaluationModalVisible] = useState(false);
+const Evaluation: React.FC<EvaluationProps> = ({
+  location: { state: { form_id = null } = {} } = {},
+}) => {
+  const [isEvaluationModalVisible, setIsEvaluationModalVisible] = useState(
+    false,
+  );
   const [isQuestionModalVisible, setIsQuestionModalVisible] = useState(false);
 
   const [items, setItems] = useState([]);
@@ -41,14 +53,20 @@ const Evaluation: React.FC = () => {
       try {
         setIsLoading(true);
         const { data: userList } = (await api.get('user/read')) as UserResponse;
-        const { data: evaluateList } = (await api.get('evaluate/list/1')) as EvaluationResponse;
+        const { data: evaluateList } = (await api.get(
+          `evaluate/list/${form_id}`,
+        )) as EvaluationResponse;
+
         const dataFormatted = userList.map((user) => {
-          const evaluation = evaluateList.find(({ user_id }) => user_id === user.id);
+          const evaluation = evaluateList.find(
+            ({ user_id }) => user_id === user.id,
+          );
           return {
             ...user,
             ...evaluation,
           };
         });
+
         setItems(dataFormatted as []);
         setIsLoading(false);
       } catch (err) {
@@ -168,7 +186,10 @@ const Evaluation: React.FC = () => {
           title="Avaliar aluno"
           closeModal={() => setIsEvaluationModalVisible(false)}
         >
-          <NewEvaluationModal user={userOpen} closeModal={() => setIsEvaluationModalVisible(false)} />
+          <NewEvaluationModal
+            user={userOpen}
+            closeModal={() => setIsEvaluationModalVisible(false)}
+          />
         </Modal>
       )}
 
