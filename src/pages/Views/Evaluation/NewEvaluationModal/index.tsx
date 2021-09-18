@@ -28,8 +28,6 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
   const [values, setValues] = useState({});
   const [error, setError] = useState('');
 
-  console.log({ id });
-
   const { userLogged: { user_type = '' } = {} } = useContext(AuthContext);
 
   const handleSubmit = async (e: SyntheticEvent) => {
@@ -42,6 +40,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
       });
       setLoading(false);
       closeModal();
+      window.location.reload();
     } catch (err) {
       setLoading(false);
       setError('Ocorreu um erro, tente novamente mais tarde.');
