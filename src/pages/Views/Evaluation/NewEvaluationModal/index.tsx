@@ -22,12 +22,13 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
   user: {
     name, usp_code, id, advisor = '',
   },
-  user,
   closeModal,
 }) => {
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({});
   const [error, setError] = useState('');
+
+  console.log({ id });
 
   const { userLogged: { user_type = '' } = {} } = useContext(AuthContext);
 
@@ -41,7 +42,6 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
       });
       setLoading(false);
       closeModal();
-      window.location.reload();
     } catch (err) {
       setLoading(false);
       setError('Ocorreu um erro, tente novamente mais tarde.');

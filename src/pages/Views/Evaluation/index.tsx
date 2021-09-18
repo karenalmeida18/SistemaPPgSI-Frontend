@@ -22,6 +22,7 @@ interface EvaluationProps {
 
 interface EvaluationData {
   user_id: string
+  id?: number
   users: {
     usp_code?: string
     name?: string
@@ -64,6 +65,7 @@ const Evaluation: React.FC<EvaluationProps> = ({
           const evaluation = evaluateList.find(
             ({ user_id }) => user_id === user.id,
           );
+          delete evaluation?.id;
           return {
             ...user,
             ...evaluation,
