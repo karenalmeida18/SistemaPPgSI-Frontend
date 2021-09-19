@@ -98,3 +98,10 @@ export const ContainerButton = styled.div(({ theme }) => `
     }
   }
 `);
+
+export const FormError = styled.p(({ theme }) => `
+  font-weight: bold;
+  font-size: 14px;
+  color: ${theme.red};
+  grid-column: 1/3;
+`);

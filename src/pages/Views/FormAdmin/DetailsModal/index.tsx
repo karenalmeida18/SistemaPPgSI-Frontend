@@ -17,6 +17,13 @@ interface DetailsModalProps {
   }
 }
 
+interface ErrorType {
+   response: {
+     data: {
+       msg: string
+     }
+  }
+}
 interface Questions {
   [key: string]: string
 }
@@ -35,6 +42,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ form }) => {
   const [formDisabled, setFormDisabled] = useState(true);
   const [loadingUpdateForm, setLoadingUpdateForm] = useState(false);
   const [fields, setFields] = useState<string[]>([]);
+  const [error, setError] = useState('');
 
   async function loadQuestions() {
     setLoading(true);
@@ -66,6 +74,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ form }) => {
   }
 
   useEffect(() => {
+    setError('');
     if (!questions || questions.length === 0) loadQuestions();
   }, []);
 
@@ -105,6 +114,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ form }) => {
 
   async function handleUpdateForm() {
     setLoadingUpdateForm(true);
+    setError('');
     try {
       await api.put(`form/update/${form.id}`, {
         ...formValues,
@@ -114,6 +124,16 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ form }) => {
       setFormDisabled(true);
       window.location.reload();
     } catch (err) {
+      const {
+        response: {
+          data: {
+            msg,
+          } = {},
+        } = {},
+      } = err as ErrorType;
+      if (msg === 'there is already an enabled form') {
+        setError('Já existe um form habilitado, desabalite ele para conseguir habiltar o atual.');
+      }
       setLoadingUpdateForm(false);
     }
   }
@@ -183,6 +203,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ form }) => {
             </>
           )}
         </S.ContainerButton>
+        <S.FormError>{error}</S.FormError>
       </S.Form>
 
       <S.Subtitle>Perguntas</S.Subtitle>
