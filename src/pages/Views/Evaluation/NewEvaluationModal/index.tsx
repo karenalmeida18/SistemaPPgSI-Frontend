@@ -16,12 +16,14 @@ interface NewEvaluationProps {
     advisor?: string
   }
   closeModal(): void
+  form_id?: number
 }
 
 const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
   user: {
     name, usp_code, id, advisor = '',
   },
+  form_id,
   closeModal,
 }) => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('evaluate/create/1', {
+      await api.post(`evaluate/create/${form_id}`, {
         user_id: id,
         ...values,
       });

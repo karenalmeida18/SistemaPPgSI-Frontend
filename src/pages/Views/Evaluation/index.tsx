@@ -192,6 +192,7 @@ const Evaluation: React.FC<EvaluationProps> = ({
           closeModal={() => setIsEvaluationModalVisible(false)}
         >
           <NewEvaluationModal
+            form_id={form_id}
             user={userOpen}
             closeModal={() => setIsEvaluationModalVisible(false)}
           />
