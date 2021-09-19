@@ -8,6 +8,10 @@ export const Container = styled.div(({ theme }) => `
   display: flex;
   justify-content: center;
   background-color: rgb(118 118 118 / 38%);
+
+  @media (max-width: 800px) {
+    height: 100%;
+   }
 `);
 
 export const Content = styled.div(({ theme }) => `
@@ -16,13 +20,13 @@ export const Content = styled.div(({ theme }) => `
   box-shadow: ${theme.shadow};
   border-radius: 4px;
   min-width: 400px;
+  max-height: 600px;
   height: max-content;
-  max-height: 100%;
-  margin-top: 10px;
   overflow-y: scroll;
 
   @media (max-width: 800px) {
     min-width: 100%;
+    max-height: 100%;
    }
 `);
 
@@ -35,7 +39,7 @@ export const Header = styled.header(({ theme }) => `
 
    > svg {
      cursor: pointer;
-     font-size: 20px;
+     font-size: 24px;
      &:hover {
        color: ${theme.secondaryBlue};
      }

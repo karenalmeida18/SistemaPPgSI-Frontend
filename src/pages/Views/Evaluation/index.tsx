@@ -40,7 +40,7 @@ interface UserResponse {
 }
 
 const Evaluation: React.FC<EvaluationProps> = ({
-  location: { state: { form_id = null } = {} } = {},
+  location: { state: { form_id } = {} } = {},
 }) => {
   const [isEvaluationModalVisible, setIsEvaluationModalVisible] = useState(
     false,
@@ -182,7 +182,7 @@ const Evaluation: React.FC<EvaluationProps> = ({
           title="Informações"
           closeModal={() => setIsQuestionModalVisible(false)}
         >
-          <ListQuestionsModal user={userOpen} />
+          <ListQuestionsModal user={userOpen} form_id={form_id} />
         </Modal>
       )}
 

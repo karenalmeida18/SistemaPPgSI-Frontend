@@ -10,6 +10,7 @@ import UserRegistration from './pages/UserRegistration';
 
 import Evaluation from './pages/Views/Evaluation';
 import EvaluationForm from './pages/Views/Evaluation/ListForms';
+import FormAdmin from './pages/Views/FormAdmin';
 
 import { isAdminAuthenticated, isAdvisorAuthenticated, isStudentAuthenticated } from './services/auth';
 
@@ -80,6 +81,7 @@ export default function Routes() {
         <Route path="/user_registration" exact component={UserRegistration} />
         <AdvisorCCPRoute exact path="/evaluation" component={EvaluationForm} />
         <AdvisorCCPRoute exact path="/evaluation/:form_id" component={Evaluation} />
+        <AdminRoute exact path="/ccp/form" component={FormAdmin} />
         <StudentRoute path="/form" exact component={Form} />
       </Switch>
     </BrowserRouter>

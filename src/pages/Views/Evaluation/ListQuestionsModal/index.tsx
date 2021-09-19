@@ -13,12 +13,14 @@ interface ListQuestionsProps {
     advisor?: string
     user_id?: number
   }
+  form_id?: number
 }
 
 const ListQuestionsModal: React.FC<ListQuestionsProps> = ({
   user: {
     name, usp_code, user_id, advisor = '',
   },
+  form_id,
 }) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ const ListQuestionsModal: React.FC<ListQuestionsProps> = ({
     async function loadQuestions() {
       setLoading(true);
       try {
-        const { data } = await api.get(`question/index/1/user/${user_id}`);
+        const { data } = await api.get(`question/index/${form_id}/user/${user_id}`);
         setQuestions(data);
         setLoading(false);
       } catch (err) {

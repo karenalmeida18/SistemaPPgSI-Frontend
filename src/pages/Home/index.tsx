@@ -44,7 +44,7 @@ const ccp = [
     title: 'Formulário',
     description: 'Visualizar ou liberar formulário para alunos',
     Icon: BsFillChatSquareQuoteFill,
-    route: '/',
+    route: '/ccp/form',
   },
 ];
 
