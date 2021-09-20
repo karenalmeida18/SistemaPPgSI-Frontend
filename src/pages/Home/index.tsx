@@ -11,7 +11,7 @@ const student = [
     title: 'Dados Pessoais',
     description: 'Visualize suas informaçõs pessoais de perfil',
     Icon: BsFillPersonFill,
-    route: '/',
+    route: '/personal_data',
   },
   {
     title: 'Histórico',
@@ -32,7 +32,7 @@ const ccp = [
     title: 'Dados Pessoais',
     description: 'Visualize suas informaçõs pessoais de perfil',
     Icon: BsFillPersonFill,
-    route: '/',
+    route: '/personal_data',
   },
   {
     title: 'Tabela',
@@ -53,7 +53,7 @@ const advisor = [
     title: 'Dados Pessoais',
     description: 'Visualize suas informaçõs pessoais de perfil',
     Icon: BsFillPersonFill,
-    route: '/',
+    route: '/personal_data',
   },
   {
     title: 'Tabela',

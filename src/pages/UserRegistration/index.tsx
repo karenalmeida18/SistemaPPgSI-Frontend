@@ -1,5 +1,5 @@
 import React, { useState, SyntheticEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Input, Select } from '../../components';
 import * as S from './styles';
 
@@ -7,15 +7,26 @@ import api from '../../services/axios';
 import { mapErrorsRegister } from '../../utils';
 
 const UserRegistration: React.FC = () => {
-  const [userType, setUserType] = useState('');
+  const history = useHistory();
+  const [userType, setUserType] = useState('student');
   const [name, setName] = useState('');
   const [uspCode, setUspCode] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [lattes, setLattes] = useState('');
+  const [lattesDate, setLattesDate] = useState('');
+  const [advisor, setAdvisor] = useState('');
+  const [course, setCourse] = useState('');
   const [error, setError] = useState({
     uspCode: '',
     password: '',
     name: '',
     userType: '',
+    email: '',
+    lattes: '',
+    lattesDate: '',
+    advisor: '',
+    course: '',
     general: '',
   });
   const [loading, setLoading] = useState(false);
@@ -41,6 +52,11 @@ const UserRegistration: React.FC = () => {
       general: '',
       userType: '',
       name: '',
+      email: '',
+      lattes: '',
+      lattesDate: '',
+      advisor: '',
+      course: '',
     });
 
     if (!uspCode || !password) {
@@ -53,16 +69,26 @@ const UserRegistration: React.FC = () => {
     } else {
       setLoading(true);
       try {
-        await api.post('/user/create', {
+        const req = {
           name,
           usp_code: uspCode,
           password,
-          userType,
+          user_type: userType,
+          email,
+          lattes,
+          lattes_date: userType === 'student' ? new Date(lattesDate) : '',
+          advisor,
+          course,
+        };
+
+        await api.post('/user/create', {
+          ...req,
         });
       } catch (err) {
         setError({ ...error, general: mapErrorsRegister(err) });
       }
       setLoading(false);
+      history.push('/login');
     }
   };
   return (
@@ -101,6 +127,62 @@ const UserRegistration: React.FC = () => {
         />
         <Input
           required
+          error={error.email}
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="Insira seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {
+          userType === 'student'
+          && (
+          <>
+            <Input
+              required
+              error={error.lattes}
+              name="lattes"
+              label="Curriculum lattes"
+              type="text"
+              placeholder="Insira o link para o curriculum lattes"
+              value={lattes}
+              onChange={(e) => setLattes(e.target.value)}
+            />
+            <Input
+              required
+              error={error.lattesDate}
+              name="lattes_date"
+              label="Data da última atualização do lattes"
+              type="date"
+              value={lattesDate}
+              onChange={(e) => setLattesDate(e.target.value)}
+            />
+            <Input
+              required
+              error={error.advisor}
+              name="advisor"
+              label="Orientador"
+              type="text"
+              placeholder="Insira o nome do orientador"
+              value={advisor}
+              onChange={(e) => setAdvisor(e.target.value)}
+            />
+            <Input
+              required
+              error={error.advisor}
+              name="course"
+              label="Curso"
+              type="text"
+              placeholder="Insira o seu seu curso"
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
+            />
+          </>
+          )
+        }
+        <Input
+          required
           error={error.password}
           name="password"
           label="Senha"
@@ -117,12 +199,10 @@ const UserRegistration: React.FC = () => {
             text="Cadastrar"
           />
         </S.GridButton>
-
         <S.Link>
           Voltar para
           <Link to="/login"> login </Link>
         </S.Link>
-
       </S.FormCard>
     </S.Container>
   );

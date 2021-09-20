@@ -2,7 +2,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
-import { Button, Input } from '../../components';
+import { Button, Input, Loading } from '../../components';
 import api from '../../services/axios';
 
 import * as S from './styles';
@@ -32,6 +32,7 @@ const Form: React.FC = () => {
   };
 
   const loadQuestions = async () => {
+    setLoading(true);
     try {
       const response = await api.get('/question/read');
 
@@ -42,6 +43,7 @@ const Form: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   const handleSubmit = async (e: SyntheticEvent) => {
@@ -75,6 +77,7 @@ const Form: React.FC = () => {
         <span>Voltar</span>
       </S.Return>
       <S.Title>Relatório Semestral</S.Title>
+      <Loading isLoading={loading} />
       <S.Form onSubmit={(e) => handleSubmit(e)}>
         {
           questions.map((question) => (

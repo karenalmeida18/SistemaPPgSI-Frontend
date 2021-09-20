@@ -12,7 +12,7 @@ export const Title = styled.h1(({ theme }) => `
   font-weight: bold;
   color: ${theme.primaryBlue};
 
-  margin-top: 32px;
+  margin: 28px 0;
 `);
 
 export const TitleInfo = styled.div(({ theme }) => `
@@ -40,13 +40,11 @@ export const Return = styled.div(({ theme }) => `
   }
 `);
 
-export const Form = styled.form(({ theme }) => `
+export const Form = styled.form(({ theme }) => `  
   width: 50%;
 
-  margin-top: 32px;
-
   > div {
-    margin-top: 24px;
+    margin-top: 20px;
   }
 
   .MuiTypography-body1 {

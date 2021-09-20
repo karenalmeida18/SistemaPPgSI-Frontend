@@ -7,7 +7,7 @@ interface LoadingProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading: boolean
 }
 
-const Button: FC<LoadingProps> = ({ isLoading }) => (
+const Loading: FC<LoadingProps> = ({ isLoading }) => (
   <>
     {isLoading && (
       <LoadingWrapper>
@@ -17,4 +17,4 @@ const Button: FC<LoadingProps> = ({ isLoading }) => (
   </>
 );
 
-export default Button;
+export default Loading;

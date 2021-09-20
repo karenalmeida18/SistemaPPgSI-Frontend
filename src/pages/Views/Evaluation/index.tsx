@@ -6,7 +6,7 @@ import NewEvaluationModal from './NewEvaluationModal';
 
 import * as S from './styles';
 
-import { Table, Modal } from '../../../components';
+import { Table, Modal, Return } from '../../../components';
 
 import api from '../../../services/axios';
 
@@ -147,6 +147,7 @@ const Evaluation: React.FC = () => {
       )}
 
       <S.Container>
+        <Return route="/" />
         <S.Header>
           {' '}
           <h2> Avaliações </h2>

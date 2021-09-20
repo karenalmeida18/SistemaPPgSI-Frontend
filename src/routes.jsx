@@ -11,6 +11,7 @@ import UserRegistration from './pages/UserRegistration';
 import Evaluation from './pages/Views/Evaluation';
 
 import { isAdminAuthenticated, isAdvisorAuthenticated, isStudentAuthenticated } from './services/auth';
+import PersonalData from './pages/PersonalData';
 
 // react/jsx-props-no-spreading
 /* eslint-disable */
@@ -68,6 +69,7 @@ export default function Routes() {
         <Route path="/user_registration" exact component={UserRegistration} />
         <Evaluation path="/evaluation" component={Evaluation} />
         <StudentRoute path="/form" exact component={Form} />
+        <LoggedRoute path="/personal_data" exact component={PersonalData} />
       </Switch>
     </BrowserRouter>
   );
