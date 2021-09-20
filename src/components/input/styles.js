@@ -19,12 +19,27 @@ export const InputWrapper = styled.div(({ theme, error }) => `
      margin-right: 10px;
      cursor: pointer;
    }
+   
+   .icon-custom {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    color: gray;
+    margin-right: 10px;
+    cursor: pointer;
+    border-left: 1px solid ${theme.gray3};
+    margin-left: 130px;
+    padding-left: 10px;
+   }
 `);
 
-export const Input = styled.input(({ theme, error, type }) => `
+export const Input = styled.input(({
+  theme, error, type, disabled,
+}) => `
    padding: 14px 10px;
    width: 100%;
-   background-color: transparent;
+   background-color: ${disabled ? theme.gray2 : 'transparent'};
    border-radius: 4px;
    outline-color: ${theme.primaryBlue};
    outline-width: thin;

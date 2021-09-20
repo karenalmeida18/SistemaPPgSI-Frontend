@@ -13,14 +13,21 @@ export const Container = styled.div(({ theme }) => `
 `);
 
 export const Header = styled.header(({ theme }) => `
-   display: flex;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   background-color: ${theme.secondaryBlueLight};
    width: 100%;
    margin-bottom: 18px;
+   border-radius: 4px;
+   padding: 10px;
 
    > p {
-      &:last-child {
-         margin-left: 16px;
-      }
+      margin: 5px 0;
+   }
+
+   @media (max-width: 800px) {
+      display: flex;
+      flex-direction: column;
    }
 `);
 

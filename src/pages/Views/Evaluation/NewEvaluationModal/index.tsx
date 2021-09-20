@@ -12,19 +12,23 @@ interface NewEvaluationProps {
   user: {
     name?: string
     usp_code?: string
-    user_id?: number
+    id?: number
+    advisor?: string
   }
-  closeModal(): void,
+  closeModal(): void
+  form_id?: number
 }
 
 const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
   user: {
-    name, usp_code, user_id,
+    name, usp_code, id, advisor = '',
   },
+  form_id,
   closeModal,
 }) => {
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({});
+  const [error, setError] = useState('');
 
   const { userLogged: { user_type = '' } = {} } = useContext(AuthContext);
 
@@ -32,8 +36,8 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('evaluate/create/1', {
-        user_id,
+      await api.post(`evaluate/create/${form_id}`, {
+        user_id: id,
         ...values,
       });
       setLoading(false);
@@ -41,6 +45,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
       window.location.reload();
     } catch (err) {
       setLoading(false);
+      setError('Ocorreu um erro, tente novamente mais tarde.');
     }
   };
 
@@ -61,6 +66,10 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
         <p>
           <b>Código USP: </b>
           {usp_code}
+        </p>
+        <p>
+          <b>Nome do orientador: </b>
+          {advisor}
         </p>
       </S.Header>
 
@@ -104,6 +113,7 @@ const NewEvaluationModal: React.FC<NewEvaluationProps> = ({
         )}
 
         <Button text="Enviar" type="submit" loading={loading} />
+        {error && <S.FormError>{error}</S.FormError>}
       </S.Form>
     </S.Container>
   );

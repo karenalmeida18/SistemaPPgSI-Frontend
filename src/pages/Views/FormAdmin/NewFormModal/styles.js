@@ -4,7 +4,6 @@ export const Container = styled.div(({ theme }) => `
    display: flex;
    flex-direction: column;
    max-height: 100%;
-   min-width: 600px;
    font-size: 14px;
 
    b {
@@ -12,8 +11,14 @@ export const Container = styled.div(({ theme }) => `
    }
 
    @media (max-width: 800px) {
-     min-width: 100%;
+      width: 100%;
+      height: 100%;
    }
+
+   > p {
+     margin-bottom: 16px;
+  }
+
 `);
 
 export const Header = styled.header(({ theme }) => `
@@ -44,21 +49,14 @@ export const Subtitle = styled.h4(({ theme }) => `
 `);
 
 export const Form = styled.form(({ theme }) => `
-   display: flex;
-   flex-direction: column;
-   padding-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  padding-bottom: 10px;
 
-   > div {
-     margin: 8px 0;
-
-     > label {
-        font-size: 14px;
-     }
-   }
-
-   > button {
-     margin-top: 24px;
-   }
+  > div {
+     margin-bottom: 10px;
+  }
 `);
 
 export const FormError = styled.p(({ theme }) => `

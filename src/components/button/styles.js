@@ -4,6 +4,7 @@ import { rotate } from '../../styles/animations';
 export const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
    display: flex;
    justify-content: center;
+   align-items: center;
    border: 0;
    padding: 14px 8px;
    border-radius: 4px;
@@ -22,4 +23,10 @@ export const StyledButton = styled.button(({ theme, bgColor, textColor }) => `
 export const LoadingWrapper = styled.div`
    animation: ${rotate} 2s linear infinite;
    margin-left: 8px;
+`;
+
+export const IconWrapper = styled.div`
+   > svg {
+      font-size: 20pt;
+   }
 `;

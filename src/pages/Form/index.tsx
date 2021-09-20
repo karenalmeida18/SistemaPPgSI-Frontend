@@ -70,6 +70,7 @@ const Form: React.FC = () => {
   useEffect(() => {
     loadQuestions();
   }, []);
+
   return (
     <S.Container>
       <S.Return onClick={() => history.push('/')}>

@@ -12,10 +12,10 @@ export const Label = styled.label(({ color, theme }) => `
   color: ${color || theme.gray4};
 `);
 
-export const Select = styled.select(({ theme }) => `
-  padding: 16px 16px;
+export const Select = styled.select(({ theme, disabled }) => `
+  padding: 14px 16px;
   border-radius: 4px;
-  background-color: transparent;
+  background-color: ${disabled ? theme.gray2 : 'transparent'};
   border: 1px solid ${theme.gray3};
   outline-color: ${theme.primaryBlue};
   color: color: ${theme.gray3};

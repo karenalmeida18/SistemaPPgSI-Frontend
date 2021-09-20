@@ -6,7 +6,7 @@ export const Container = styled.div`
    align-items: center;
    width: 100%;
    height: 100%;
-   padding: 30px 40px;
+   padding: 30px 140px;
 
    @media (max-width: 1124px) {
       padding: 10px 30px;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Header = styled.header(({ theme }) => `
    width: 100%;
-   margin: 10px 0;
+   margin: 30px 0;
 
    > h2 {
       color: ${theme.gray4};

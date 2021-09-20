@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { BsFillPersonFill, BsReverseLayoutTextSidebarReverse, BsFillChatSquareQuoteFill } from 'react-icons/bs';
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -17,7 +17,7 @@ const student = [
     title: 'Histórico',
     description: 'Verificar notas atuais e histórico semestral',
     Icon: BsReverseLayoutTextSidebarReverse,
-    route: '/',
+    route: '/history',
   },
   {
     title: 'Formulário',
@@ -44,7 +44,7 @@ const ccp = [
     title: 'Formulário',
     description: 'Visualizar ou liberar formulário para alunos',
     Icon: BsFillChatSquareQuoteFill,
-    route: '/',
+    route: '/ccp/form',
   },
 ];
 
@@ -71,12 +71,13 @@ const screen = {
 
 const Home = () => {
   const history = useHistory();
-  const { userLogged: { name = '', user_type = '' } = {} } = useContext(
+  const { userLogged: { name = '', user_type = '', id = null } = {} } = useContext(
     AuthContext,
   );
 
   return (
     <>
+      {!id && <Redirect to="login" /> }
       <S.Container>
         <S.Header>
           <h3>{`Olá, ${name}`}</h3>

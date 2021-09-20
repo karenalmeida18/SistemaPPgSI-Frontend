@@ -9,6 +9,9 @@ import Form from './pages/Form';
 import UserRegistration from './pages/UserRegistration';
 
 import Evaluation from './pages/Views/Evaluation';
+import EvaluationForm from './pages/Views/Evaluation/ListForms';
+import FormAdmin from './pages/Views/FormAdmin';
+import History from './pages/Views/History';
 
 import { isAdminAuthenticated, isAdvisorAuthenticated, isStudentAuthenticated } from './services/auth';
 import PersonalData from './pages/PersonalData';
@@ -48,6 +51,17 @@ const AdvisorRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const AdvisorCCPRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => ((isAdvisorAuthenticated() || isAdminAuthenticated()) ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    ))}
+  />
+);
+
 const LoggedRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -67,7 +81,10 @@ export default function Routes() {
         <LoggedRoute path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/user_registration" exact component={UserRegistration} />
-        <Evaluation path="/evaluation" component={Evaluation} />
+        <AdvisorCCPRoute exact path="/evaluation" component={EvaluationForm} />
+        <AdvisorCCPRoute exact path="/evaluation/:form_id" component={Evaluation} />
+        <AdminRoute exact path="/ccp/form" component={FormAdmin} />
+        <StudentRoute path="/history" exact component={History} />
         <StudentRoute path="/form" exact component={Form} />
         <LoggedRoute path="/personal_data" exact component={PersonalData} />
       </Switch>

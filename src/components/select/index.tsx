@@ -15,6 +15,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
     required,
     onChange,
     value,
+    disabled,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
         {required && ' *'}
       </S.Label>
       <S.Select
+        disabled={disabled}
         value={value}
         onChange={onChange}
       >
