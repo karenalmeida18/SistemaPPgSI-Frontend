@@ -62,7 +62,7 @@ const UpdateData: React.FC<IPropsUpdate> = (props: IPropsUpdate) => {
         advisor: form.advisor,
         course: form.course,
       };
-      const response = await api.post('/user/update', {
+      const response = await api.put('/user/update', {
         ...req,
       });
       updateUser(response.data);
