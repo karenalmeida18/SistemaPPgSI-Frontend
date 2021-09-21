@@ -11,14 +11,14 @@ interface ListQuestionsProps {
     name?: string
     usp_code?: string
     advisor?: string
-    user_id?: number
+    id?: number
   }
   form_id?: number
 }
 
 const ListQuestionsModal: React.FC<ListQuestionsProps> = ({
   user: {
-    name, usp_code, user_id, advisor = '',
+    name, usp_code, id, advisor = '',
   },
   form_id,
 }) => {
@@ -29,7 +29,7 @@ const ListQuestionsModal: React.FC<ListQuestionsProps> = ({
     async function loadQuestions() {
       setLoading(true);
       try {
-        const { data } = await api.get(`question/index/${form_id}/user/${user_id}`);
+        const { data } = await api.get(`question/index/${form_id}/user/${id}`);
         setQuestions(data);
         setLoading(false);
       } catch (err) {
@@ -60,8 +60,8 @@ const ListQuestionsModal: React.FC<ListQuestionsProps> = ({
       <S.Subtitle>Respostas</S.Subtitle>
       <Loading isLoading={loading} />
 
-      {!loading && questions.map(({ description, answers = [], id }, index) => (
-        <S.Question key={id}>
+      {!loading && questions.map(({ description, answers = [], id: questionid }, index) => (
+        <S.Question key={questionid}>
           <p>
             <b>{`${index + 1} - ${description}`}</b>
           </p>
